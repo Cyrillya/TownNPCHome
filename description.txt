@@ -1,7 +1,7 @@
-It added a command "/npchome". It teleports all town NPCs to their homes (if they have) immediately.
+ï»¿It added a command "/npchome". It teleports all town NPCs to their homes (if they have) immediately.
 If the player changes the NPC's home, it will be teleported to its new home.
 
-Ìí¼ÓÁËÒ»¸öÖ¸Áî"/npchome". ¿ÉÒÔÖ±½Ó½«ËùÓĞNPC´«ËÍ»ØËûÃÇµÄ¼Ò.
-Èç¹ûÍæ¼Ò¸Ä±äÁËÄ³¸öNPCµÄ¼Ò£¬ÄÇÃ´Õâ¸öNPC»áÁ¢¿Ì´«ËÍµ½ËüµÄĞÂ¼Ò.
+æ·»åŠ äº†ä¸€ä¸ªæŒ‡ä»¤"/npchome". å¯ä»¥ç›´æ¥å°†æ‰€æœ‰NPCä¼ é€å›ä»–ä»¬çš„å®¶.
+å¦‚æœç©å®¶æ”¹å˜äº†æŸä¸ªNPCçš„å®¶ï¼Œé‚£ä¹ˆè¿™ä¸ªNPCä¼šç«‹åˆ»ä¼ é€åˆ°å®ƒçš„æ–°å®¶.
 
 Github: https://github.com/Crapsky233/TownNPCHome
