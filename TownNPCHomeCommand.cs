@@ -19,7 +19,7 @@ namespace TownNPCHome
             => "Teleport all town NPC to home immediately.";
 
         public override void Action(CommandCaller caller, string input, string[] args) {
-            foreach (var npc in from n in Main.npc where n is not null && n.active && n.townNPC && !n.homeless select n) {
+            foreach (var npc in from n in Main.npc where n != null && n.active && n.townNPC && !n.homeless select n) {
                 TownNPCHome.TownEntitiesTeleportToHome(npc, npc.homeTileX, npc.homeTileY);
             }
         }
