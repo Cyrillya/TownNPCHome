@@ -1,7 +1,7 @@
-﻿It added a command "/npchome". It teleports all town NPCs to their homes (if they have) immediately.
-If the player changes the NPC's home, it will be teleported to its new home.
+﻿Right clicking the "Housing" button will teleport all town NPCs home (There is a 1.5s cooldown in multiplayer)
+If the player changes the NPC's home, it will be teleported to its new home
 
-添加了一个指令"/npchome". 可以直接将所有NPC传送回他们的家.
-如果玩家改变了某个NPC的家，那么这个NPC会立刻传送到它的新家.
+右键单击“房屋”按钮会将所有NPC立刻传送回家（在多人模式中有1.5s的冷却）
+如果玩家改变了某个NPC的家，那么这个NPC会立刻传送到它的新家
 
 Github: https://github.com/Crapsky233/TownNPCHome
