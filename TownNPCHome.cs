@@ -1,3 +1,5 @@
+using System.IO;
+using System.Linq;
 using System.Reflection;
 using Terraria;
 using Terraria.ModLoader;
@@ -17,8 +19,16 @@ namespace TownNPCHome
         }
         
         internal static void TownEntitiesTeleportToHome(NPC npc, int homeFloorX, int homeFloorY) {
-            var targetMethod = npc.GetType().GetMethod("AI_007_TownEntities_TeleportToHome", BindingFlags.Instance | BindingFlags.NonPublic, new[] { typeof(int), typeof(int) });
-            if (targetMethod != null) targetMethod.Invoke(npc, new object[] {homeFloorX, homeFloorY});
+            npc?.GetType().GetMethod("AI_007_TownEntities_TeleportToHome",
+                BindingFlags.Instance | BindingFlags.NonPublic,
+                new[] { typeof(int), typeof(int) })?
+                .Invoke(npc, new object[] {homeFloorX, homeFloorY});
+        }
+
+        public override void HandlePacket(BinaryReader reader, int whoAmI) {
+            foreach (var npc in from n in Main.npc where n is not null && n.active && n.townNPC && !n.homeless select n) {
+                TownEntitiesTeleportToHome(npc, npc.homeTileX, npc.homeTileY);
+            }
         }
     }
 }

@@ -13,8 +13,6 @@ namespace TownNPCHome
 {
     internal class QuickHomeInterface : ModSystem
     {
-        private int _multiplayerCooldown = 0;
-        
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers) {
             var inventoryIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Inventory"));
             if (inventoryIndex != -1) {
@@ -43,17 +41,19 @@ namespace TownNPCHome
                         Vector2 size = TextureAssets.EquipPage[5].Size();
                         if (Collision.CheckAABBvAABBCollision(iconPosition, size, Main.MouseScreen, Vector2.One) && Main.mouseItem.stack < 1) {
                             Main.hoverItemName += Language.ActiveCulture.Name == "zh-Hans" ? "（右键单击以将所有城镇NPC传送回家）" : " (Right click to teleport all town NPCs home)";
-                            if (Main.mouseRight && Main.mouseRightRelease && _multiplayerCooldown <= 0) {
-                                foreach (var npc in from n in Main.npc where n is not null && n.active && n.townNPC && !n.homeless select n) {
-                                    TownNPCHome.TownEntitiesTeleportToHome(npc, npc.homeTileX, npc.homeTileY);
-                                }
+                            if (Main.mouseRight && Main.mouseRightRelease) {
+
                                 SoundEngine.PlaySound(SoundID.Chat);
+
+                                // for mp we send a packet to server and let the server process the code
                                 if (Main.netMode == NetmodeID.MultiplayerClient) {
-                                    _multiplayerCooldown = 60; // we don't want a player to crash the server using this.
+                                    Mod.GetPacket().Send();
+                                }
+                                else foreach (var npc in from n in Main.npc where n is not null && n.active && n.townNPC && !n.homeless select n) {
+                                    TownNPCHome.TownEntitiesTeleportToHome(npc, npc.homeTileX, npc.homeTileY);
                                 }
                             }
                         }
-                        _multiplayerCooldown--;
                         return true;
                     },
                     InterfaceScaleType.UI)
