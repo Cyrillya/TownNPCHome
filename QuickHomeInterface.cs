@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
@@ -15,14 +14,17 @@ namespace TownNPCHome
     internal class QuickHomeInterface : ModSystem
     {
         private int _multiplayerCooldown = 0;
-
+        
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers) {
-            if (Main.playerInventory) {
-                int InventoryIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Inventory"));
-                if (InventoryIndex != -1) {
-                    layers.Insert(InventoryIndex + 1, new LegacyGameInterfaceLayer(
+            var inventoryIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Inventory"));
+            if (inventoryIndex != -1) {
+                layers.Insert(inventoryIndex + 1, new LegacyGameInterfaceLayer(
                     "TownNPCHome: Quick Home Feature",
                     delegate {
+                        if (!Main.playerInventory) {
+                            return true;
+                        }
+
                         // vanilla source code
                         int mH = 0;
                         if (Main.mapEnabled) {
@@ -47,7 +49,7 @@ namespace TownNPCHome
                                 }
                                 SoundEngine.PlaySound(SoundID.Chat);
                                 if (Main.netMode == NetmodeID.MultiplayerClient) {
-                                    _multiplayerCooldown = 90; // we don't want a player to crash the server using this.
+                                    _multiplayerCooldown = 60; // we don't want a player to crash the server using this.
                                 }
                             }
                         }
@@ -56,7 +58,6 @@ namespace TownNPCHome
                     },
                     InterfaceScaleType.UI)
                 );
-                }
             }
         }
     }
