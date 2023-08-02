@@ -40,7 +40,9 @@ namespace TownNPCHome
                         Vector2 iconPosition = new(Main.screenWidth - 128, yPos);
                         Vector2 size = TextureAssets.EquipPage[5].Size();
                         if (Collision.CheckAABBvAABBCollision(iconPosition, size, Main.MouseScreen, Vector2.One) && Main.mouseItem.stack < 1) {
-                            Main.hoverItemName += Language.ActiveCulture.Name == "zh-Hans" ? "（右键单击以将所有城镇NPC传送回家）" : " (Right click to teleport all town NPCs home)";
+                            Main.hoverItemName += Language.ActiveCulture.Name == "zh-Hans"
+                                ? "（右键单击以将所有城镇NPC传送回家）"
+                                : " (Right click to teleport all town NPCs home)";
                             if (Main.mouseRight && Main.mouseRightRelease) {
 
                                 SoundEngine.PlaySound(SoundID.Chat);

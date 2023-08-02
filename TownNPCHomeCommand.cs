@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Terraria;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace TownNPCHome
@@ -16,7 +17,9 @@ namespace TownNPCHome
             => "/npchome";
 
         public override string Description
-            => "Teleport all town NPCs to home immediately.";
+            => Language.ActiveCulture.Name == "zh-Hans"
+                ? "立即将所有城镇NPC传送回家。"
+                : "Teleport all town NPCs to home immediately.";
 
         public override void Action(CommandCaller caller, string input, string[] args) {
             foreach (var npc in from n in Main.npc where n is not null && n.active && n.townNPC && !n.homeless select n) {
