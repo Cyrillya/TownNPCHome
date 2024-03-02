@@ -1,4 +1,4 @@
 displayName = Teleport All NPC Home
-author = -Cyril-
-version = 1.3
+author = Cyrilly
+version = 1.4
 homepage = https://github.com/Cyrillya/TownNPCHome
